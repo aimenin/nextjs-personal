@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import MainNavigation from './main-navigation';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -7,7 +8,7 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      {/* <MainNavigation /> */}
+      <MainNavigation />
       <main>{children}</main>
     </>
   );
