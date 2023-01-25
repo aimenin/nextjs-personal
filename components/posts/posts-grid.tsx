@@ -11,7 +11,7 @@ const PostsGrid: FC<PostsGridProps> = ({ posts }) => {
   return (
     <ul className={classes.grid}>
       {posts.map((post) => {
-        return <PostsItem post={post} key={post.title} />;
+        return <PostsItem post={post} key={post.slug} />;
       })}
     </ul>
   );
