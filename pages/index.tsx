@@ -1,6 +1,9 @@
 import FeaturedPosts from '@/components/home-page/featured-posts';
 import Hero from '@/components/home-page/hero';
+import { getFeaturedPosts } from '@/lib/posts-util';
+import { Post } from '@/types/post';
 import Head from 'next/head';
+import { FC } from 'react';
 
 export const DUMMY_POSTS = [
   {
@@ -33,7 +36,11 @@ export const DUMMY_POSTS = [
   },
 ];
 
-export default function Home() {
+interface HomeProps {
+  posts: Post[];
+}
+
+const Home: FC<HomeProps> = ({ posts }) => {
   return (
     <>
       <Head>
@@ -43,7 +50,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero />
-      <FeaturedPosts posts={DUMMY_POSTS} />
+      <FeaturedPosts posts={posts} />
     </>
   );
-}
+};
+
+export default Home;
+
+export const getStaticProps = () => {
+  const featuredProps = getFeaturedPosts();
+
+  return {
+    props: {
+      posts: featuredProps,
+    },
+    revalidate: 60,
+  };
+};

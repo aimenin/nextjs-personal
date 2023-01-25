@@ -1,8 +1,11 @@
 export type Post = {
+  content: string;
   title: string;
-  image: string;
-  excerpt: string;
   date: string;
+  author: string;
+  image: string;
+  excert: string;
+  isFeatured: boolean;
   slug: string;
 };
 

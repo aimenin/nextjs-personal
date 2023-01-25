@@ -9,7 +9,7 @@ interface AllPostsProps {
 
 const AllPosts: FC<AllPostsProps> = ({ posts }) => {
   return (
-    <section>
+    <section className={classes.posts}>
       <h1>All Posts</h1>
       <PostsGrid posts={posts} />
     </section>
