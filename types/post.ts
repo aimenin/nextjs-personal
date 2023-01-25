@@ -5,3 +5,12 @@ export type Post = {
   date: string;
   slug: string;
 };
+
+export type PostMarkdown = {
+  title: string;
+  date: string;
+  author: string;
+  image: string;
+  excert: string;
+  isFeatured: boolean;
+};
