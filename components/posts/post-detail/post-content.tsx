@@ -2,6 +2,8 @@ import ReactMarkdown from 'react-markdown';
 
 import PostHeader from './post-header';
 import classes from './post-content.module.css';
+import { getPostData } from '@/lib/posts-util';
+import { FC } from 'react';
 
 const DUMMY_POST = {
   slug: 'getting-started-with-nextjs',
@@ -11,13 +13,17 @@ const DUMMY_POST = {
   content: '# This is a first post',
 };
 
-const PostContent = () => {
-  const imagePath = `/images/posts/${DUMMY_POST.slug}/${DUMMY_POST.image}`;
+interface PostContentProps {
+  post: ReturnType<typeof getPostData>;
+}
+
+const PostContent: FC<PostContentProps> = ({ post }) => {
+  const imagePath = `/images/posts/${post.slug}/${post.image}`;
 
   return (
     <article className={classes.content}>
-      <PostHeader title={DUMMY_POST.title} image={imagePath} />
-      <ReactMarkdown>{DUMMY_POST.content}</ReactMarkdown>
+      <PostHeader title={post.title} image={imagePath} />
+      <ReactMarkdown>{post.content}</ReactMarkdown>
     </article>
   );
 };

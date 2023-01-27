@@ -6,14 +6,17 @@ import { PostMarkdown } from '@/types/post';
 
 const postsRirectory = path.join(process.cwd(), 'posts');
 
+export const getPostsFiles = () => {
+  return fs.readdirSync(postsRirectory);
+};
+
 export const getPostData = (fileName: string) => {
-  const filePath = path.join(postsRirectory, fileName);
+  const postSlug = fileName.replace(/\.md/, '');
+  const filePath = path.join(postsRirectory, `${postSlug}.md`);
   const fileContent = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(fileContent);
 
   const transformData: PostMarkdown = data as PostMarkdown;
-
-  const postSlug = fileName.replace(/\.md/, '');
 
   const postData = {
     slug: postSlug,
@@ -25,7 +28,7 @@ export const getPostData = (fileName: string) => {
 };
 
 export const getAllPosts = () => {
-  const postFiles = fs.readdirSync(postsRirectory);
+  const postFiles = getPostsFiles();
 
   const allPosts = postFiles.map((postFile) => {
     return getPostData(postFile);
