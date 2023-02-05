@@ -1,15 +1,9 @@
+import { ContactNotification, RequestStatus } from '@/types/notification';
 import { FC } from 'react';
-import ReactDOM from 'react-dom';
 
 import classes from './notification.module.css';
 
-interface NotificationProps {
-  title: string;
-  message: string;
-  status: string;
-}
-
-const Notification: FC<NotificationProps> = ({ title, message, status }) => {
+const Notification: FC<ContactNotification> = ({ title, message, status }) => {
   let statusClasses = '';
 
   if (status === 'success') {
