@@ -46,8 +46,6 @@ const Home: FC<HomeProps> = ({ posts }) => {
       <Head>
         <title>Aimenin personal site</title>
         <meta name="description" content="Personal webstite of aimenin" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero />
       <FeaturedPosts posts={posts} />
