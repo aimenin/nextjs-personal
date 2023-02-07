@@ -1,6 +1,7 @@
 import PostContent from '@/components/posts/post-detail/post-content';
 import { getPostData, getPostsFiles } from '@/lib/posts-util';
 import { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from 'next';
+import Head from 'next/head';
 import { ParsedUrlQuery } from 'querystring';
 
 interface IParams extends ParsedUrlQuery {
@@ -10,7 +11,15 @@ interface IParams extends ParsedUrlQuery {
 const PostDetailPage = ({
   post,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return <PostContent post={post} />;
+  return (
+    <>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={post.excert} />
+      </Head>
+      <PostContent post={post} />;
+    </>
+  );
 };
 
 export const getStaticProps: GetStaticProps<{
