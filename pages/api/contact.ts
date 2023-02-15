@@ -31,7 +31,7 @@ const handler = async (req: ContactNextApiRequest, res: NextApiResponse) => {
 
     try {
       const client = await MongoClient.connect(
-        `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.bllf1q7.mongodb.net/my-site?retryWrites=true&w=majority`
+        `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}.bllf1q7.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`
       );
 
       const db = client.db();
