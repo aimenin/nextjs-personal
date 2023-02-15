@@ -7,8 +7,13 @@ import classes from './post-content.module.css';
 import { getPostData } from '@/lib/posts-util';
 import { NormalComponents } from 'react-markdown/lib/complex-types';
 import { SpecialComponents } from 'react-markdown/lib/ast-to-react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import atomDark from 'react-syntax-highlighter/dist/cjs/styles/prism/atom-dark';
+import js from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
+import ts from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
+
+SyntaxHighlighter.registerLanguage('js', js);
+SyntaxHighlighter.registerLanguage('ts', ts);
 
 const DUMMY_POST = {
   slug: 'getting-started-with-nextjs',
