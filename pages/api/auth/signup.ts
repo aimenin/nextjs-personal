@@ -9,6 +9,9 @@ interface AuthNextApiRequest extends NextApiRequest {
 }
 
 const handler = async (req: AuthNextApiRequest, res: NextApiResponse) => {
+  if (req.method !== 'POST') {
+    return;
+  }
   const { email, password } = req.body;
 
   if (
@@ -28,7 +31,7 @@ const handler = async (req: AuthNextApiRequest, res: NextApiResponse) => {
 
   const db = client.db();
 
-  const hashedPassword = hashPassword(password);
+  const hashedPassword = await hashPassword(password);
 
   db.collection('users').insertOne({
     email,
