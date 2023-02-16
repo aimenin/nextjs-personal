@@ -31,13 +31,22 @@ const handler = async (req: AuthNextApiRequest, res: NextApiResponse) => {
 
   const db = client.db();
 
+  const existingUsers = await db.collection('users').findOne({ email: email });
+
+  if (existingUsers) {
+    res.status(422).json({ message: 'Users exists already' });
+    await client.close();
+    return;
+  }
+
   const hashedPassword = await hashPassword(password);
 
-  db.collection('users').insertOne({
+  await db.collection('users').insertOne({
     email,
     password: hashedPassword,
   });
 
+  client.close();
   res.status(201).json({ message: 'Created User!' });
 };
 
