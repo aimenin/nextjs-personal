@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/client';
 import { Session } from 'next-auth';
 
-import ProfileForm from './profile-form';
+import ProfileForm, { PasswordInput } from './profile-form';
 import classes from './user-profile.module.css';
 
 const UserProfile = () => {
@@ -22,10 +22,24 @@ const UserProfile = () => {
   //   return <p className={classes.profile}>Loading...</p>;
   // }
 
+  const changePasswordHandler = async (passwordData: PasswordInput) => {
+    const response = await fetch('/api/user/change-user', {
+      method: 'PATCH',
+      body: JSON.stringify(passwordData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+
+    console.log('data ', data);
+  };
+
   return (
     <section className={classes.profile}>
       <h1>Your User Profile</h1>
-      <ProfileForm />
+      <ProfileForm onChangePassword={changePasswordHandler} />
     </section>
   );
 };
