@@ -1,5 +1,7 @@
-import { createUser } from '@/lib/api';
 import { FormEventHandler, useState } from 'react';
+import { signIn } from 'next-auth/client';
+
+import { createUser } from '@/lib/api';
 import classes from './auth-form.module.css';
 
 const AuthForm = () => {
@@ -15,7 +17,13 @@ const AuthForm = () => {
     event.preventDefault();
 
     if (isLogin) {
-      // log user in
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+
+      console.log(result);
     } else {
       try {
         const result = await createUser(email, password);
